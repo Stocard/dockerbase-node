@@ -12,7 +12,7 @@ WORKDIR /root
 RUN apt-get update \
 && apt-get upgrade -y --no-install-recommends \
 && apt-get install -y software-properties-common \
-&& apt-get install -y curl git htop unzip vim wget \
+&& apt-get install -y curl git htop unzip vim wget 
 
 # Increase limits
 RUN touch /etc/security/limits.d/my.conf \
