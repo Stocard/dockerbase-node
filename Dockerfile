@@ -18,6 +18,5 @@ RUN apt-get update \
 RUN touch /etc/security/limits.d/my.conf \
 && echo '* hard nofile 16384' >> /etc/security/limits.d/my.conf \
 && echo '* soft nofile 16384' >> /etc/security/limits.d/my.conf \
-
 && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
