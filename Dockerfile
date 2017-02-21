@@ -31,7 +31,9 @@ RUN curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-
 RUN apt-get update \
 && apt-get upgrade -y --no-install-recommends \
 && apt-get install -y software-properties-common \
-&& apt-get install -y curl git htop unzip vim wget
+&& apt-get install -y curl git htop unzip vim wget netcat
+
+RUN npm i -g yarn
 
 # Increase limits
 RUN touch /etc/security/limits.d/my.conf \
