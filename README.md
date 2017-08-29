@@ -1,6 +1,6 @@
 # dockerbase-node
 
-node version 5.7.0 from
+node version 6.9.5 from
 https://hub.docker.com/_/node/
 
 with tini-init from
