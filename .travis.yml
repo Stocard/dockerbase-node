@@ -4,6 +4,7 @@ services:
 script:
 - docker build -t stocard/dockerbase-node:$TRAVIS_COMMIT .
 - docker tag stocard/dockerbase-node:$TRAVIS_COMMIT $REGISTRY_PREFIX/stocard/dockerbase-node:$TRAVIS_BRANCH
+- docker tag stocard/dockerbase-node:$TRAVIS_COMMIT $REGISTRY_PREFIX/stocard/dockerbase-node:$TRAVIS_COMMIT
 after_success:
 - docker login -u="$PRIVATE_DOCKER_USERNAME" -p="$PRIVATE_DOCKER_PASSWORD" $PRIVATE_REGISTRY && docker push $REGISTRY_PREFIX/stocard/dockerbase-node:$TRAVIS_COMMIT && docker push $REGISTRY_PREFIX/stocard/dockerbase-node:$TRAVIS_BRANCH && docker logout
 env:
