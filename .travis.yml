@@ -5,7 +5,7 @@ script:
 - docker build -t stocard/node:$TRAVIS_COMMIT .
 - docker tag stocard/node:$TRAVIS_COMMIT stocard/node:$TRAVIS_BRANCH
 after_success:
-- docker login -u "$DOCKER_USERNAME" -p "DOCKER_PASSWORD" && docker push stocard/node:$TRAVIS_COMMIT && docker push stocard/node:$TRAVIS_BRANCH && docker logout
+- docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD" && docker push stocard/node:$TRAVIS_COMMIT && docker push stocard/node:$TRAVIS_BRANCH && docker logout
 env:
   global:
   - secure: b5n4KDKTz8M1IjME3SxNPfzanZgFNPb/XnxjNyCxjy0nYMi5mc2j0/f11JZTqjVX1Tx+DXgWsTNuZcqQ0wglamRH6jJ9yn1Ar5lPvGDmv48fKVnWp8/ZdpCF9crAQnLPMswQzxxhyQqFc79i/9pE8VifjxOX5L089EwQppulh7igM6UqZ6uSGmE0Zp/rg26oiOyBmKb1dbhJ0bYAzShUXexWxaFNbahjkIzPrKutNEEvmVBh9+iOlVfROEXJHbd60tKf6X//C1YNFy+HC7srwtaIxDiVEafCeVyy4eSQDNaZCEkpJMaHpBr+xymEr37ec3xpJd8pBlPlUWVEj919ug8GaqBD9fKqNQirrH6DiuQ3MgbG3ia/6vdvUqOJtv9zgUhhuecFahwxebyIyXuAqXJZvV8b6mORr9IjVuc3LgkgEgh8xEXah3XtDH8NS1WEfnislD8UEmoIuYkVw4vwVWCp+Im0XocZtV1Y3b88jHO81CVuRk0Ri6jFT3pnhXni4gVkvxwtEt/ht6fWj3F5bAF4iysLSeEswWcuLNC3iV8nTCIY7tO4ZdSltsQPevwNKBc1qyqKmaTLhdQ7reDujqy5Chhhr1IBAmZTptQg4voV4hHy8fRiqpUk0MidqFsa93ggfNXCtSckMYC6AxNaRClU4Sjw6lTEWsyA0+PfvFQ=
