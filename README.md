@@ -1,6 +1,6 @@
 # dockerbase-node
 
-node version 8.4.0 downloaded from
+node version 8.9.1 downloaded from
 https://nodejs.org/dist/
 
 
