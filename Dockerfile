@@ -9,5 +9,6 @@ RUN apk add --no-cache tini
 RUN apk update
 RUN apk upgrade
 RUN apk add bash
+RUN apk add curl
 
 ENTRYPOINT ["/sbin/tini", "--"]
