@@ -5,6 +5,6 @@ WORKDIR /root
 
 
 # install tini to properly handle zombie reaping & signal comm
-RUN apk add --no-cache tini bash curl git
+RUN apk add --update --no-cache tini bash curl git
 
 ENTRYPOINT ["/sbin/tini", "--"]
