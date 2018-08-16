@@ -1,13 +1,15 @@
 sudo: required
-env:
-  matrix:
-    - NODE=8
-    - NODE=8.11
-    - NODE=10
+
+matrix:
+  include:
+    env: NODE=8
+    env: NODE=8.11
+    env: NODE=10
+
 services:
 - docker
 script:
-  - echo $NODE
+  - echo "$NODE"
 # - docker build -t stocard/node:$TRAVIS_COMMIT .
 # - docker tag stocard/node:$TRAVIS_COMMIT stocard/node:$TRAVIS_BRANCH
 # after_success:
