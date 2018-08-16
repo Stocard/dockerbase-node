@@ -2,12 +2,12 @@ sudo: required
 
 matrix:
   include:
-    env: NODE=8
-    env: NODE=8.11
-    env: NODE=10
+    - env: NODE=8
+    - env: NODE=10
+    - env: NODE=8.11
 
 services:
-- docker
+  - docker
 script:
   - echo "$NODE"
 # - docker build -t stocard/node:$TRAVIS_COMMIT .
