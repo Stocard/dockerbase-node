@@ -1,6 +1,8 @@
 # dockerbase-node
 
-Provides a base image to run node.js applications in.
+Provides a base image to run node.js applications in: `stocard/node:X.Y`
+
+You can try it out by: `docker run -it stocard/node:8.11 node`
 
 It currently builds three different base images:
 
@@ -8,7 +10,7 @@ It currently builds three different base images:
 * node version 8.x
 * node version 10.x
 
-It size is ~26MB.
+The size is ~26MB.
 
 ### More information
 
