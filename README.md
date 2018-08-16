@@ -22,3 +22,8 @@ It also includes:
 * `curl`
 
 and has tini-init from https://github.com/krallin/tini
+
+### Adding new versions
+
+* Add a new `- env: NODE=<<MAJOR_OR_MINOR_VERSION>>` line to `matrix include` block. Don't forget to insert a version!
+* Also update the description above to add the new version.
