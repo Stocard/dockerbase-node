@@ -1,8 +1,9 @@
 sudo: required
 env:
-  - NODE=8
-  - NODE=8.11
-  - NODE=10
+  matrix:
+    - NODE=8
+    - NODE=8.11
+    - NODE=10
 services:
 - docker
 script:
