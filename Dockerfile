@@ -1,4 +1,4 @@
-FROM node:8.11-alpine
+FROM node:{VERSION}-alpine
 
 ENV HOME /root
 WORKDIR /root
