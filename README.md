@@ -1,9 +1,22 @@
 # dockerbase-node
 
-node version 8.11.x downloaded from
-https://nodejs.org/dist/
+Provides a base image to run node.js applications in.
 
+It currently builds three different base images:
 
-with tini-init from
-https://github.com/krallin/tini
+* newest minor semver of node 8
+* node version 8.x
+* node version 10.x
 
+It size is ~26MB.
+
+### More information
+
+The base image is based on `node:x.x-alpine` (https://hub.docker.com/_/node/).
+
+It also includes:
+
+* `bash`
+* `curl`
+
+and has tini-init from https://github.com/krallin/tini
