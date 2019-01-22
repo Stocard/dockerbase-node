@@ -10,9 +10,12 @@ services:
   - docker
 script:
 - sed -i "s/{VERSION}/${NODE}/g" ./Dockerfile
-- docker build -t stocard/node:$NODE .
+- docker build -t stocard/node:$NODE -f ./Dockerfile .
+- docker tag stocard/node:$NODE stocard/node:$NODE-builder
+- sed -i "s/{VERSION}/${NODE}/g" ./Dockerfile-runner
+- docker build -t stocard/node:$NODE-runner -f ./Dockerfile-runner .
 after_success:
-- docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD" && docker push stocard/node:$NODE && docker logout
+- docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD" && docker push stocard/node:$NODE && docker push stocard/node:$NODE-builder && docker push stocard/node:$NODE-runner && docker logout
 env:
   global:
   - secure: qiWFg23Mmpx+1y4s3SSH5/BmhTSTG2kABgFB52eu3mXqd/eFoJy33zSN/T5+o7JjvEJ/Up4hxfvLCu4bt6n/t8QHkeey4V1ZCp7AI/zpNelK2y1QkBdJUBhORWjUxYGEW0cEmh/NdV0XN58/uXTG8v9rae8JA642+zYXdjUewsKLx/rYrqOwj7ugK/OfPW/9LBSnj/nIXOJdHp9EHnMc5GbXTOqETuBsNdylD567QziEVncJdJYlYw8Aku03aIZ4Brxyr6s7j5lzoN4YM2aW/Tyaybb6+ph7GMZsJd6Fe5u0NrZ8JgV/j4bPfnpaToOUO+DKF8QeaEaff6eboNHmbWwQm5OHz9rGy2zam6qE1PmKs/FEhNa+i2Kn9DD0o88arUVLkk6p8wpBe4TtoYqUd22sBPsJherI1kvQdKcEhhc2X56lqfK1HrNabZaYp7UOoRibdPRyAkcgPR18Y89GEf29TnD9vGfWWd4m+1iCYiaZmxwO1dJ6mabkdc99nkLfH8bH9HM+0v5ZanB91iA7mZcZ6GarcGh4AsY8K8eJEcZWehxk09GS3Q75J9kb7oVnQzquPhYa1DVs0bY/crYcltlgAJnCmlgWuBxYChu1cx2H4JdZFiIR1RpXW5D2NnCaLpueNp5FanFF1CXbgQpwMasGCVIWlmBx27x+wJPwOC4=
