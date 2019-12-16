@@ -3,8 +3,9 @@ language: generic
 matrix:
   include:
     - env: NODE=8
-    - env: NODE=10
     - env: NODE=8.11
+    - env: NODE=10
+    - env: NODE=12
 
 services:
   - docker
