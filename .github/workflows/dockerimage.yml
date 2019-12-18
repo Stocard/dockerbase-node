@@ -10,7 +10,7 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-    
+
     strategy:
       matrix:
         NODE: [8, 8.11, 10, 12]
@@ -18,7 +18,7 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Insert node version into Dockerfile
-      run: sed -i "s/{VERSION}/${NODE}/g" ./Dockerfile
+      run: sed -i "s/{VERSION}/${{ matrix.NODE }}/g" ./Dockerfile
     - name: Build the Docker image
       run: docker build -t stocard/node:${{ matrix.NODE }} .
     - name: Push docker image to dockerhub
