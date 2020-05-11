@@ -10,7 +10,7 @@ jobs:
 
     strategy:
       matrix:
-        NODE: [8, 8.11, 10, 12]
+        NODE: [8, 8.11, 8.17, 10, 12]
 
     steps:
     - uses: actions/checkout@v1
