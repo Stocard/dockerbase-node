@@ -2,15 +2,12 @@
 
 Provides a base image to run node.js applications in: `stocard/node:X.Y`
 
-You can try it out by: `docker run -it stocard/node:8.11 node`
+You can try it out by: `docker run -it stocard/node:12 node`
 
-It currently builds three different base images:
-
-* newest minor semver of node 8
-* node version 8.x
-* node version 10.x
-
-The size is ~26MB.
+Current base images:
+- 12
+- 14
+- 16
 
 ### More information
 
