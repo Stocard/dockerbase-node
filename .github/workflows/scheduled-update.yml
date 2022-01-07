@@ -38,15 +38,21 @@ jobs:
         sed -i "s/{VERSION}/${LATEST_NODE_VERSION}/g" ./Dockerfile
 
         cat ./Dockerfile
-    
-    - name: Build the Docker image
+
+    - name: Build & Tag docker image for ${{ env.LATEST_NODE_VERSION }}
       run: docker build -t stocard/node:${LATEST_NODE_VERSION} .
     
-    - name: Push docker image to dockerhub
+    - name: Push docker image ${{ env.LATEST_NODE_VERSION }} to dockerhub
       run: |
-        docker login -u="${{ secrets.DOCKER_USERNAME }}" -p="${{ secrets.DOCKER_PASSWORD }}"
-
         echo "Pushing docker stocard/node:${LATEST_NODE_VERSION} to dockerhub"
         docker push stocard/node:${LATEST_NODE_VERSION}
-        
-        docker logout
+
+    - name: Tag & Push docker image ${{ matrix.NODE }} to dockerhub
+      run: |
+        docker tag stocard/node:${LATEST_NODE_VERSION} stocard/node:${{ matrix.NODE }}
+
+        echo "Pushing docker stocard/node:${{ matrix.NODE }} to dockerhub"
+        docker push stocard/node:${{ matrix.NODE }}
+
+    - name: Logout of dockerhub
+      run: docker logout
