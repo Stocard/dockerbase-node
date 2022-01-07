@@ -39,6 +39,9 @@ jobs:
 
         cat ./Dockerfile
 
+    - name: Login to dockerhub
+      run: docker login -u="${{ secrets.DOCKER_USERNAME }}" -p="${{ secrets.DOCKER_PASSWORD }}"
+
     - name: Build & Tag docker image for ${{ env.LATEST_NODE_VERSION }}
       run: docker build -t stocard/node:${LATEST_NODE_VERSION} .
     
