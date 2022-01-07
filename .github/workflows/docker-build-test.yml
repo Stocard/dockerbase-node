@@ -3,18 +3,17 @@ name: Docker Image Build & Test
 on: [push]
 
 jobs:
-
   build:
-
     runs-on: ubuntu-latest
-
     strategy:
       matrix:
-        NODE: [8, 8.11, 8.17, 10, 12, 14]
+        NODE: [12, 14, 16]
 
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2
+
     - name: Insert node version into Dockerfile
       run: sed -i "s/{VERSION}/${{ matrix.NODE }}/g" ./Dockerfile
+    
     - name: Build the Docker image
       run: docker build -t stocard/node:${{ matrix.NODE }} .
