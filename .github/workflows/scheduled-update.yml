@@ -1,0 +1,56 @@
+name: Scheduled Update
+
+# This event is triggered every Monday at 10:00 UTC
+on:
+  schedule:
+    - cron: '0 10 * * MON' # https://crontab.guru/#0_10_*_*_MON
+  
+jobs:
+  update:
+    name: Update Nodejs based docker image
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        NODE: [12, 14, 16]
+
+    steps:
+    - uses: actions/checkout@v2
+      name: Cloning repository
+
+    - uses: actions/setup-node@v2
+      name: Setting Node.js Version
+      with:
+        node-version: '${{ matrix.NODE }}.x'
+
+    - name: Determine latest version for v${{ matrix.NODE }}
+      run: |
+        LATEST_NODE_VERSION=$(node --version | sed -r "s/[v]//g")
+
+        echo "Latest version is ${LATEST_NODE_VERSION}"
+
+        echo "LATEST_NODE_VERSION=${LATEST_NODE_VERSION}" >> $GITHUB_ENV 
+
+    - name: Insert node version into Dockerfile
+      run: |
+        sed -i "s/{VERSION}/${LATEST_NODE_VERSION}/g" ./Dockerfile
+
+    - name: Login to dockerhub
+      run: docker login -u="${{ secrets.DOCKER_USERNAME }}" -p="${{ secrets.DOCKER_PASSWORD }}"
+
+    - name: Build & Tag docker image for ${{ env.LATEST_NODE_VERSION }}
+      run: docker build -t stocard/node:${LATEST_NODE_VERSION} .
+    
+    - name: Push docker image ${{ env.LATEST_NODE_VERSION }} to dockerhub
+      run: |
+        echo "Pushing docker stocard/node:${LATEST_NODE_VERSION} to dockerhub"
+        docker push stocard/node:${LATEST_NODE_VERSION}
+
+    - name: Tag & Push docker image ${{ matrix.NODE }} to dockerhub
+      run: |
+        docker tag stocard/node:${LATEST_NODE_VERSION} stocard/node:${{ matrix.NODE }}
+
+        echo "Pushing docker stocard/node:${{ matrix.NODE }} to dockerhub"
+        docker push stocard/node:${{ matrix.NODE }}
+
+    - name: Logout of dockerhub
+      run: docker logout
