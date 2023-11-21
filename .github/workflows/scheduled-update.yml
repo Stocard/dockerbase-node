@@ -3,7 +3,7 @@ name: Scheduled Update
 # This event is triggered every Monday at 10:00 UTC
 on:
   schedule:
-    - cron: '45 14 * * TUE' # https://crontab.guru/#0_10_*_*_MON
+    - cron: '0 10 * * MON' # https://crontab.guru/#0_10_*_*_MON
 
 jobs:
   update:
