@@ -4,14 +4,14 @@ name: Scheduled Update
 on:
   schedule:
     - cron: '0 10 * * MON' # https://crontab.guru/#0_10_*_*_MON
-  
+
 jobs:
   update:
     name: Update Nodejs based docker image
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        NODE: [12, 14, 16]
+        NODE: [12, 14, 16, 18]
 
     steps:
     - uses: actions/checkout@v2
@@ -28,7 +28,7 @@ jobs:
 
         echo "Latest version is ${LATEST_NODE_VERSION}"
 
-        echo "LATEST_NODE_VERSION=${LATEST_NODE_VERSION}" >> $GITHUB_ENV 
+        echo "LATEST_NODE_VERSION=${LATEST_NODE_VERSION}" >> $GITHUB_ENV
 
     - name: Insert node version into Dockerfile
       run: |
@@ -39,7 +39,7 @@ jobs:
 
     - name: Build & Tag docker image for ${{ env.LATEST_NODE_VERSION }}
       run: docker build -t stocard/node:${LATEST_NODE_VERSION} .
-    
+
     - name: Push docker image ${{ env.LATEST_NODE_VERSION }} to dockerhub
       run: |
         echo "Pushing docker stocard/node:${LATEST_NODE_VERSION} to dockerhub"

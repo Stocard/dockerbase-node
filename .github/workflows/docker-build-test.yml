@@ -7,13 +7,13 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        NODE: [12, 14, 16]
+        NODE: [12, 14, 16, 18]
 
     steps:
     - uses: actions/checkout@v2
 
     - name: Insert node version into Dockerfile
       run: sed -i "s/{VERSION}/${{ matrix.NODE }}/g" ./Dockerfile
-    
+
     - name: Build the Docker image
       run: docker build -t stocard/node:${{ matrix.NODE }} .
